@@ -1,0 +1,11 @@
+raf.foundations.foundry-demo:namespace {
+    import('raf.foundations');
+    webapp:product{
+        name: 'demo-webapp';
+        description: 'Software foundry foundations demonstration product';
+    };
+    webapi:component{};
+    client:component{};
+    user:entity{};
+    company:entity{};
+}
