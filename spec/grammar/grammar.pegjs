@@ -1,8 +1,11 @@
 Start
+= Namespaces
+
+Namespaces
 = Namespace*
 
 Namespace
-= ns:NsType _ name:String { return name; }
+= ns:NsType _ name:String LineTerminatorSequence { return name; }
 
 NsType = "namespace"
 
@@ -34,4 +37,11 @@ Escape         = "\\"
 DIGIT  = [0-9]
 HEXDIG = [0-9a-f]i
 
+LineTerminatorSequence "end of line"
+  = "\n"
+  / "\r\n"
+  / "\r"
+  / "\u2028"
+  / "\u2029"
+  
 _ "whitespace" = [ \t\n\r]*
