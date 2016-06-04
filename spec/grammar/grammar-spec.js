@@ -1,5 +1,5 @@
 var parserMaker = require('../../maker/parser-maker');
-describe('grammar', function () {
+describe('grammar-maker', function () {
     it('can parse base grammar', function () {
         var fs = require('fs');
         var grammar = fs.readFileSync('./spec/grammar/grammar.pegjs', 'utf8');

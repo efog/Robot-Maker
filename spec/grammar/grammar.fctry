@@ -1,2 +1,15 @@
-namespace raf.foundations.webapp-demo
-namespace raf.foundations.webapp-demo
+webapp:app {
+    var name = "first web app" var name = "Login view"
+    app:config {
+        var env = "dev"
+        var isProd = false
+        var port = 13
+    } 
+    app:views [2, false, "ONE", login:view {
+        var name = "Login view"
+        var setup = {
+            var header = "<html></html>"
+            var arr = [1, 2, 3]
+        }
+    }]
+}
