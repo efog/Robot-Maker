@@ -9,7 +9,7 @@ webapp:app {
         var name = "Login view"
         var setup = {
             var header = "<html></html>"
-            var arr = [1, 2, 3]
+            var arr = numbers:ports[1, 2, 3]
         }
     }]
 }

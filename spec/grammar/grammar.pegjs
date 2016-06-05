@@ -1,22 +1,43 @@
 {
+  function Var(name, value){
+    var self = this;
+    self.name = name;
+    self.value = value;
+  }
+  function Block(name, type, members){
+    var self = this;
+    self.name = name;
+    self.type = type;
+    self.members = members;
+  }
+  function Array(name, type, members){
+    var self = this;
+    self.name = name;
+    self.type = type;
+    self.members = members;
+  }
 }
 Start
-= (_ Block _)*
+= blocks:(_ Block _)* { return { blocks: blocks }; }
 
 Member
-= _ (Array / Block / Var) _
+= _ member:(Array / Block / Var) _ { return member; }
 
 Array
 = an:NameType?
   ArrayStart
-  members: ArrayMember
+  members: ArrayItems
   ArrayEnd 
-  { return { name: an.name, type: an.type, members: members  }; }
+  { return new Array(an.name, an.type, members); }
 
-ArrayMember
+ArrayItems
 = first: (Member / Value)
   next: (_ "," _ val:(Member / Value) { return val; } )*
-  { return [first].concat(next); }
+  { return { items: [first].concat(next) }; }
+ArrayStart 
+= _ "[" _ 
+ArrayEnd 
+= _ "]" _ 
   
 Block
 = 
@@ -24,10 +45,14 @@ Block
   BlockStart
   members:Member*
   BlockEnd 
-  { return { name: bn.name, type: bn.type, members: members  }; }
+  { return new Block(bn.name, bn.type, members); }
+BlockStart 
+= _ "{" _ 
+BlockEnd 
+= _ "}" _ 
 
 Var
-= "var" _ name:Name _ "=" _ val:Value { return { name: name, val: val, type: "var" } }
+= "var" _ name:Name _ "=" _ val:Value { return new Var(name, val); }
 
 Value
 = (Bool / String / Block / Array / Number)
@@ -38,14 +63,6 @@ NameType
   type:(":"
   type:Name { return type; })? { return { name: name, type: type }; }
   
-BlockStart 
-= _ "{" _ 
-BlockEnd 
-= _ "}" _ 
-ArrayStart 
-= _ "[" _ 
-ArrayEnd 
-= _ "]" _ 
 
 Name
 = chars:[a-zA-Z\-.]* { return chars.join(""); }
