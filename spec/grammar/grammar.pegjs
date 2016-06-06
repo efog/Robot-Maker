@@ -1,5 +1,5 @@
 {
-  function Var(name, value){
+  function Let(name, value){
     var self = this;
     self.name = name;
     self.value = value;
@@ -21,7 +21,7 @@ Start
 = blocks:(_ Block _)* { return { blocks: blocks }; }
 
 Member
-= _ member:(Array / Block / Var) _ { return member; }
+= _ member:(Array / Block / Let) _ { return member; }
 
 Array
 = an:NameType?
@@ -51,8 +51,8 @@ BlockStart
 BlockEnd 
 = _ "}" _ 
 
-Var
-= "var" _ name:Name _ "=" _ val:Value { return new Var(name, val); }
+Let
+= "let" _ name:Name(":"Name)? _ "=" _ val:Value { return new Let(name, val); }
 
 Value
 = (Bool / String / Block / Array / Number)
