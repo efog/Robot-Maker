@@ -1,19 +1,20 @@
 {
-  function Let(name, value){
+  function Let(name, value, stereotype){
     var self = this;
     self.name = name;
     self.value = value;
+    self.stereotype = stereotype;
   }
-  function Block(name, type, members){
+  function Block(name, stereotype, members){
     var self = this;
     self.name = name;
-    self.type = type;
+    self.stereotype = stereotype;
     self.members = members;
   }
-  function Array(name, type, members){
+  function Array(name, stereotype, members){
     var self = this;
     self.name = name;
-    self.type = type;
+    self.stereotype = stereotype;
     self.members = members;
   }
 }
@@ -24,11 +25,11 @@ Member
 = _ member:(Array / Block / Let) _ { return member; }
 
 Array
-= an:NameType?
+= an:NameStereotype?
   ArrayStart
   members: ArrayItems
   ArrayEnd 
-  { return new Array(an.name, an.type, members); }
+  { return new Array(an.name, an.stereotype, members); }
 
 ArrayItems
 = first: (Member / Value)
@@ -41,27 +42,27 @@ ArrayEnd
   
 Block
 = 
-  bn:(NameType)?
+  bn:(NameStereotype)?
   BlockStart
   members:Member*
   BlockEnd 
-  { return new Block(bn.name, bn.type, members); }
+  { return new Block(bn.name, bn.stereotype, members); }
 BlockStart 
 = _ "{" _ 
 BlockEnd 
 = _ "}" _ 
 
 Let
-= "let" _ name:Name(":"Name)? _ "=" _ val:Value { return new Let(name, val); }
+= "let" _ ln:NameStereotype _ "=" _ val:Value { return new Let(ln.name, val, ln.stereotype); }
 
 Value
 = (Bool / String / Block / Array / Number)
 
-NameType
+NameStereotype
 =
   name:Name
-  type:(":"
-  type:Name { return type; })? { return { name: name, type: type }; }
+  stereotype:(":"
+  stereotype:Name { return stereotype; })? { return { name: name, stereotype: stereotype }; }
   
 
 Name
