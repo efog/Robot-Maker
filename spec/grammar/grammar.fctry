@@ -1,16 +1,16 @@
-webapp:app {
-    let name:uber = "first web app" 
+webapp <<app>> {
+    let name <<uber>> = "first web app" 
     let name = "Login view"
-    app:config {
+    app <<config>> {
         let env = "dev"
         let isProd = false
         let port = 13
     } 
-    app:views [2, false, "ONE", login:view {
+    app<<views>> [2, false, "ONE",    app <<views>>[2, false, "ONE", login <<view>> {
         let name = "Login view"
         let setup = {
             let header = "<html></html>"
-            let arr = numbers:ports[1, 2, 3]
+            let arr = numbers <<ports>>[1, 2, 3]
         }
-    }]
+    }]]
 }

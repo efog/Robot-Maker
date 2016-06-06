@@ -60,10 +60,12 @@ Value
 
 NameStereotype
 =
-  name:Name
-  stereotype:(":"
-  stereotype:Name { return stereotype; })? { return { name: name, stereotype: stereotype }; }
+  name:Name _
+  stereotype:(Stereotype)? { return { name: name, stereotype: stereotype }; }
   
+Stereotype
+=
+"<<" _ name:Name _ ">>" { name: name }
 
 Name
 = chars:[a-zA-Z\-.]* { return chars.join(""); }
