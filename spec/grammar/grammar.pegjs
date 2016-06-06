@@ -18,8 +18,21 @@
     self.members = members;
   }
 }
+// Start of parser
 Start
 = blocks:(_ Block _)* { return { blocks: blocks }; }
+  
+Block
+= 
+  bn:(NameStereotype)
+  BlockStart
+  members:Member*
+  BlockEnd 
+  { return new Block(bn.name, bn.stereotype, members); }
+BlockStart 
+= _ "{" _ 
+BlockEnd 
+= _ "}" _ 
 
 Member
 = _ member:(Array / Block / Let) _ { return member; }
@@ -30,7 +43,6 @@ Array
   members: ArrayItems
   ArrayEnd 
   { return new Array(an.name, an.stereotype, members); }
-
 ArrayItems
 = first: (Member / Value)
   next: (_ "," _ val:(Member / Value) { return val; } )*
@@ -39,22 +51,9 @@ ArrayStart
 = _ "[" _ 
 ArrayEnd 
 = _ "]" _ 
-  
-Block
-= 
-  bn:(NameStereotype)?
-  BlockStart
-  members:Member*
-  BlockEnd 
-  { return new Block(bn.name, bn.stereotype, members); }
-BlockStart 
-= _ "{" _ 
-BlockEnd 
-= _ "}" _ 
 
 Let
 = "let" _ ln:NameStereotype _ "=" _ val:Value { return new Let(ln.name, val, ln.stereotype); }
-
 Value
 = (Bool / String / Block / Array / Number)
 
@@ -62,13 +61,13 @@ NameStereotype
 =
   name:Name _
   stereotype:(Stereotype)? { return { name: name, stereotype: stereotype }; }
+
+Name
+= chars:[a-zA-Z\-.]* { return chars.join(""); }
   
 Stereotype
 =
 "<<" _ name:Name _ ">>" { name: name }
-
-Name
-= chars:[a-zA-Z\-.]* { return chars.join(""); }
 
 Number 
 = [0-9]*("."[0-9]*)? { return parseFloat(text()); }

@@ -1,12 +1,19 @@
-webapp <<app>> {
-    let name <<uber>> = "first web app" 
-    let name = "Login view"
+raf.app <<app>> {
+    let name = "basic web app"
+    let domain-models <<model>> = [
+    ]
+    let api <<api>> = {
+    }
+    let app <<app>> = {
+    }
+    let db <<database>> = {
+    }
     app <<config>> {
         let env = "dev"
         let isProd = false
         let port = 13
     } 
-    app<<views>> [2, false, "ONE",    app <<views>>[2, false, "ONE", login <<view>> {
+    app<<views>> [2, false, "ONE", app <<views>>[2, false, "ONE", login <<view>> {
         let name = "Login view"
         let setup = {
             let header = "<html></html>"
