@@ -1,7 +1,8 @@
 {
     "env": {
         "node": true,
-        "jasmine": true
+        "jasmine": true,
+        "es6": true
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -35,7 +36,7 @@
         "eol-last": "off",
         "eqeqeq": "error",
         "func-names": "off",
-        "func-style": "error",
+        "func-style": "off",
         "generator-star-spacing": "error",
         "global-require": "off",         
         "guard-for-in": "error",
@@ -49,8 +50,8 @@
         "key-spacing": "error",
         "keyword-spacing": "error",
         "linebreak-style": [
-            "error",
-            "windows"
+            "off",
+            "unix"
         ],
         "lines-around-comment": "error",
         "max-depth": "error",
@@ -75,7 +76,7 @@
         "no-div-regex": "error",
         "no-duplicate-imports": "error",
         "no-else-return": "error",
-        "no-empty-function": "error",
+        "no-empty-function": "off",
         "no-eq-null": "error",
         "no-eval": "error",
         "no-extend-native": "error",
@@ -110,8 +111,8 @@
         "no-octal-escape": "error",
         "no-param-reassign": "error",
         "no-path-concat": "error",
-        "no-plusplus": "error",
-        "no-process-env": "error",
+        "no-plusplus": "off",
+        "no-process-env": "off",
         "no-process-exit": "error",
         "no-proto": "error",
         "no-prototype-builtins": "error",
@@ -127,12 +128,12 @@
         "no-shadow-restricted-names": "error",
         "no-spaced-func": "error",
         "no-sync": "off",
-        "no-ternary": "error",
+        "no-ternary": "off",
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
         "no-undef-init": "error",
         "no-undefined": "error",
-        "no-underscore-dangle": "error",
+        "no-underscore-dangle": "off",
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",
         "no-unsafe-finally": "error",
@@ -152,7 +153,7 @@
         "no-with": "error",
         "object-curly-spacing": "error",
         "object-property-newline": "error",
-        "object-shorthand": "error",
+        "object-shorthand": "off",
         "one-var": "off",
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
@@ -160,7 +161,7 @@
         "padded-blocks": "off",
         "prefer-arrow-callback": "off",
         "prefer-const": "error",
-        "prefer-reflect": "error",
+        "prefer-reflect": "off",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "error",
@@ -174,7 +175,7 @@
         "sort-imports": "error",
         "sort-vars": "error",
         "space-before-blocks": "error",
-        "space-before-function-paren": "error",
+        "space-before-function-paren": "off",
         "space-in-parens": [
             "error",
             "never"
